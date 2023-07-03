@@ -1,0 +1,4 @@
+tmp/
+cmake-build-debug/
+/CMakeLists.txt
+
