@@ -24,10 +24,32 @@ typedef struct TetField { //game board
     TetBlock* blocks;  //array of blocks
 } TetField;
 
+enum {
+    TET_GAMEOVER = 0,
+    TET_PLAYiNG
+};
+
+enum {
+    TET_PLAYER_NOP = 0,
+    TET_PLAYER_UP,
+    TET_PLAYER_DOWN,
+    TET_PLAYER_LEFT,
+    TET_PLAYER_RIGHT
+};
+
+typedef struct TetPlayer {
+    int action;
+} TetPlayer;
+
 typedef struct TetGame{
     TetField* field; // game board
     TetFigure* figure; // figure drop info
     TetFiguresT* figurest; //info about how shapes look others fig
+    TetPlayer* player;
+    int ticks;
+    int ticks_left;
+    int playing;
+    int score;
 } TetGame;
 
 TetGame* createTetGame(int field_width, int field_height, int figure_size,
