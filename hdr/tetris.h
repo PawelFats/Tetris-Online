@@ -25,7 +25,7 @@ typedef struct TetField { //game board
 } TetField;
 
 typedef struct TetGame{
-    TetField* filed; // game board
+    TetField* field; // game board
     TetFigure* figure; // figure drop info
     TetFiguresT* figurest; //info about how shapes look others fig
 } TetGame;
