@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
     nodelay(stdscr, TRUE);
     scrollok(stdscr, TRUE);
 
-    TetGame* tetg = createTetGame(35, 31, 5,
+    TetGame* tetg = createTetGame(25, 20, 5,
     7, tet_templates);
     TetPlayer player;
     player.action = TET_PLAYER_NOP;

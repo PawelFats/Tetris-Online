@@ -181,8 +181,6 @@ void freeTetFigure(TetFigure* tf) {
     }
 }
 
-
-
 void dropNewFigure(TetGame* tetg) {
     TetFigure* t = createTetFigure(tetg);
     t->x = tetg->field->width/2 - t->size/2;
@@ -212,7 +210,7 @@ TetFigure* rotTetFigure(TetGame* tetg) {
             t->blocks[i*t->size+j].b = told->blocks[j*t->size+t->size-1-i].b;
         }
     }
-
+    return t;
 }
 
 void calculateTet(TetGame* tetg) {
