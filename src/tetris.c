@@ -100,6 +100,62 @@ int collisionTet(TetGame* tetg) {
     return 0;
 }
 
+void planFigure(TetGame* tetg) {
+    TetFigure* t = tetg->figure;
+    for(int i=0; i<t->size; i++)
+        for(int j=0; j<t->size; j++)
+            if(t->blocks[i*t->size+j].b != 0)
+            {
+                int fx = t->x + j;
+                int fy = t->y + i;
+                tetg->field->blocks[fy*tetg->field->width+fx].b =
+                        t->blocks[i*t->size+j].b;
+            }
+}
+
+int lineFilledTet(int i, TetField* tfl) {
+    for(int j=0; j<tfl->width; j++)
+        if(tfl->blocks[i*tfl->width+j].b == 0)
+        {
+            return 0;
+        }
+    return 1;
+}
+
+void dropLineTet(int i, TetField* tfl) {
+    if(i == 0)
+    {
+        for(int j=0; j<tfl->width; j++)
+        {
+            tfl->blocks[j].b = 0;
+        }
+    }
+    else
+    {
+        for(int k=i; k>0; k++)
+        {
+            for(int j=0; j<tfl->width; j++)
+            {
+                tfl->blocks[k+tfl->width+j].b = tfl->blocks[(k-1)*tfl->width+j].b;
+            }
+        }
+    }
+}
+
+int eraseLinesTet(TetGame* tetg) {
+    TetField* tfl = tetg->field;
+    int count = 0;
+    for(int i=tfl->height-1; i>=0; i--)
+    {
+        while(lineFilledTet(i, tfl))
+        {
+            dropLineTet(i,tfl);
+            count++;
+        }
+    }
+    return count;
+}
+
 void calculateTet(TetGame* tetg) {
     if(tetg->ticks_left <= 0)
     {
@@ -142,7 +198,8 @@ void calculateTet(TetGame* tetg) {
                 moveFigureUp(tetg);
             }
             break;
-        case TET_PLAYER_UP: {
+        case TET_PLAYER_UP:
+        {
             TetFigure* t = rotFigure(tetg);
             TetFigure* told = tetg->figure;
             tetg->figure = t;
@@ -161,7 +218,5 @@ void calculateTet(TetGame* tetg) {
         default:
             break;
     }
-
     tetg->ticks_left--;
-
 }
