@@ -55,44 +55,25 @@ typedef struct TetGame{
 } TetGame;
 
 TetFiguresT* createTetFiguresT(int count, int figures_size, TetBlock* figures_template);
-
 void freeTetFigurest(TetFiguresT* tetft);
-
 TetField* createTetField(int width, int height);
-
 void freeTetField(TetField* tetf);
-
 TetGame* createTetGame(int field_width, int field_height, int figure_size,
                        int count, TetBlock* figures_templates);
-
 void freeTetGame(TetGame* tetg);
-
 void moveFigureDown(TetGame* tetg);
-
 void moveFigureUp(TetGame* tetg);
-
 void moveFigureRight(TetGame* tetg);
-
 void moveFigureLeft(TetGame* tetg);
-
 int collisionTet(TetGame* tetg);
-
 void planFigure(TetGame* tetg);
-
 int lineFilledTet(int i, TetField* tfl);
-
 void dropLineTet(int i, TetField* tfl);
-
 int eraseLinesTet(TetGame* tetg);
-
 TetFigure* createTetFigure(TetGame* tetg);
-
 void freeTetFigure(TetFigure* tf);
-
 void dropNewFigure(TetGame* tetg);
-
 TetFigure* rotTetFigure(TetGame* tetg);
-
 void calculateTet(TetGame* tetg);
 
 
