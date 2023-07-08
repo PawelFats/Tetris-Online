@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ncurses.h>
+#include <time.h>
 
 #include "../hdr/main.h"
 
@@ -33,8 +35,9 @@ void printTetGame(TetGame* tetg) {
 
 int main(int argc, char* argv[]) {
 
+    struct timespec sp_start, sp_end, ts1, ts2 = {0, 0};
 
-    TetGame* tetg = createTetGame(232, 13, 5,
+    TetGame* tetg = createTetGame(35, 31, 5,
     7, tet_templates);
     TetPlayer player;
     player.action = TET_PLAYER_NOP;
@@ -44,8 +47,24 @@ int main(int argc, char* argv[]) {
 
     while(tetg->playing != TET_GAMEOVER)
     {
+        //initscr();
+
+        clock_gettime(CLOCK_MONOTONIC, &sp_start);
         calculateTet(tetg);
+
+        //refresh();
+
         printTetGame(tetg);
+        clock_gettime(CLOCK_MONOTONIC, &sp_end);
+        if(sp_end.tv_sec - sp_start.tv_sec <= 0 && (ts2.tv_nsec = 33000000 -
+                (sp_end.tv_nsec - sp_start.tv_nsec)) > 0)
+        {
+            nanosleep(&ts2, &ts1);
+        }
+
+        //refresh();
+        //getch();
+        //endwin();
     }
 
     printf("Hello, World!\n");

@@ -2,7 +2,7 @@
 #define TETRIS_ONLINE_MAIN_H
 
 #include "../hdr/tetris.h"
-
+#include <ncurses.h>
 
 TetBlock tet_templates[] = {
         0,0,1,0,0,
