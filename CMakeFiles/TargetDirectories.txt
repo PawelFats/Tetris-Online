@@ -1,0 +1,3 @@
+/home/pavel/Tetris-Online/CMakeFiles/Tetris_Online.dir
+/home/pavel/Tetris-Online/CMakeFiles/edit_cache.dir
+/home/pavel/Tetris-Online/CMakeFiles/rebuild_cache.dir

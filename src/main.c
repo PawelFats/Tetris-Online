@@ -3,50 +3,6 @@
 
 #include "../hdr/main.h"
 
-TetBlock tet_templates[] = {
-        0,0,1,0,0,
-        0,0,1,0,0,
-        0,0,1,0,0,
-        0,0,1,0,0,
-        0,0,1,0,0,
-
-        0,0,0,0,0,
-        0,0,1,0,0,
-        0,1,1,1,0,
-        0,0,0,0,0,
-        0,0,0,0,0,
-
-        0,0,0,0,0,
-        0,0,1,1,0,
-        0,0,1,0,0,
-        0,0,1,0,0,
-        0,0,0,0,0,
-
-        0,0,0,0,0,
-        0,1,1,0,0,
-        0,0,1,0,0,
-        0,0,1,0,0,
-        0,0,1,0,0,
-
-        0,0,0,0,0,
-        0,0,1,1,0,
-        0,1,1,0,0,
-        0,0,0,0,0,
-        0,0,0,0,0,
-
-        0,0,0,0,0,
-        0,1,1,0,0,
-        0,0,1,1,0,
-        0,0,0,0,0,
-        0,0,0,0,0,
-
-        0,0,0,0,0,
-        0,1,1,0,0,
-        0,1,1,0,0,
-        0,0,0,0,0,
-        0,0,0,0,0,
-        };
-
 void printTetGame(TetGame* tetg) {
     TetField* tf = tetg->field;
     TetFigure* t = tetg->figure;
@@ -61,8 +17,8 @@ void printTetGame(TetGame* tetg) {
             }
             else
             {
-                int x = fx - t->x;
-                int y = fy - t->y;
+                int x = j - t->x;
+                int y = i - t->y;
                 if(x >= 0 && x < t->size && y >= 0 && y < t->size)
                 {
                     if(t->blocks[y*t->size+x].b != 0)
@@ -76,11 +32,15 @@ void printTetGame(TetGame* tetg) {
 }
 
 int main(int argc, char* argv[]) {
-    TetGame* tetg = createTetGame(50, 37, 5,
+
+
+    TetGame* tetg = createTetGame(232, 13, 5,
     7, tet_templates);
     TetPlayer player;
     player.action = TET_PLAYER_NOP;
     tetg->player = &player;
+
+    dropNewFigure(tetg);
 
     while(tetg->playing != TET_GAMEOVER)
     {

@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file,CMakeFiles/Tetris_Online.dir/link.d CMakeFiles/Tetris_Online.dir/src/main.c.o CMakeFiles/Tetris_Online.dir/src/tetris.c.o -o Tetris_Online 

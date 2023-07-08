@@ -58,7 +58,7 @@ TetFiguresT* createTetFiguresT(int count, int figures_size, TetBlock* figures_te
 void freeTetFigurest(TetFiguresT* tetft);
 TetField* createTetField(int width, int height);
 void freeTetField(TetField* tetf);
-TetGame* createTetGame(int field_width, int field_height, int figure_size,
+TetGame* createTetGame(int field_width, int field_height, int figures_size,
                        int count, TetBlock* figures_templates);
 void freeTetGame(TetGame* tetg);
 void moveFigureDown(TetGame* tetg);

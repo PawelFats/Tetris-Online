@@ -41,11 +41,11 @@ void freeTetField(TetField* tetf) {
     }
 }
 
-TetGame* createTetGame(int field_width, int field_height, int figure_size,
+TetGame* createTetGame(int field_width, int field_height, int figures_size,
                        int count, TetBlock* figures_templates) {
     TetGame* tetg = (TetGame*) malloc(sizeof (TetGame));
     tetg->field = createTetField(field_width, field_height);
-    tetg->figurest = createTetFiguresT(count, figure_size, figures_templates);
+    tetg->figurest = createTetFiguresT(count, figures_size, figures_templates);
 
     tetg->ticks = TET_TICKS_START;
     tetg->ticks_left = TET_TICKS_START;
@@ -185,7 +185,7 @@ void freeTetFigure(TetFigure* tf) {
 
 void dropNewFigure(TetGame* tetg) {
     TetFigure* t = createTetFigure(tetg);
-    t->x = tetg->width/2 - t->size/2;
+    t->x = tetg->field->width/2 - t->size/2;
     t->y = 0;
     int fnum = rand() % tetg->figurest->count;
     for(int i=0; i<t->size; i++)
