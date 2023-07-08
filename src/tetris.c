@@ -156,6 +156,60 @@ int eraseLinesTet(TetGame* tetg) {
     return count;
 }
 
+TetFigure* createTetFigure(TetGame* tetg) {
+    TetFigure* t = (TetFigure*) malloc(sizeof(TetFigure));
+    t->x = 0;
+    t->y = 0;
+    t->size = tetg->figurest->size;
+    t->blocks = (TetBlock*) malloc(sizeof(TetBlock)*t->size*t->size);
+    return t;
+}
+
+void freeTetFigure(TetFigure* tf) {
+    if(tf)
+    {
+        if(tf->blocks)
+        {
+            free(tf->blocks);
+        }
+        free(tf);
+    }
+}
+
+
+
+void dropNewFigure(TetGame* tetg) {
+    TetFigure* t = createTetFigure(tetg);
+    t->x = tetg->width/2 - t->size/2;
+    t->y = 0;
+    int fnum = rand() % tetg->figurest->count;
+    for(int i=0; i<t->size; i++)
+    {
+        for(int j=0; j<t->size; j++)
+        {
+            t->blocks[i*t->size+j].b = tetg->figurest->blocks[fnum*t->size*t->size +
+                                                              i*t->size + j].b;
+        }
+    }
+    freeTetFigurest(tetg->figure);
+    tetg->figure = t;
+}
+
+TetFigure* rotTetFigure(TetGame* tetg) {
+    TetFigure* t = createTetFigure(tetg);
+    TetFigure* told = tetg->figure;
+    t->x = told->x;
+    t->y = told->y;
+    for(int i=0; i<t->size; i++)
+    {
+        for(int j=0; j<t->size; j++)
+        {
+            t->blocks[i*t->size+j].b = told->blocks[j*t->size+t->size-1-i].b;
+        }
+    }
+
+}
+
 void calculateTet(TetGame* tetg) {
     if(tetg->ticks_left <= 0)
     {
@@ -200,17 +254,17 @@ void calculateTet(TetGame* tetg) {
             break;
         case TET_PLAYER_UP:
         {
-            TetFigure* t = rotFigure(tetg);
+            TetFigure* t = rotTetFigure(tetg);
             TetFigure* told = tetg->figure;
             tetg->figure = t;
             if(collisionTet(tetg))
             {
                 tetg->figure = told;
-                freeFigure(t);
+                freeTetFigure(t);
             }
             else
             {
-                freeFigure(told);
+                freeTetFigure(told);
             }
         }
             break;
