@@ -47,6 +47,11 @@ TetGame* createTetGame(int field_width, int field_height, int figure_size,
     tetg->field = createTetField(field_width, field_height);
     tetg->figurest = createTetFiguresT(count, figure_size, figures_templates);
 
+    tetg->ticks = TET_TICKS_START;
+    tetg->ticks_left = TET_TICKS_START;
+    tetg->score = 0;
+    tetg->playing = TET_PLAYiNG;
+
     return tetg;
 }
 
